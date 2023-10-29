@@ -7,6 +7,8 @@ import {koaBody} from 'koa-body'
 const cors = require('@koa/cors')
 const json = require('koa-json')
 
+import compose from 'koa-compose'
+
 
 const app = new koa()
 const router = new Router()
@@ -14,9 +16,8 @@ const router = new Router()
 router.prefix('/api')
 
 router.get('/', ctx => {
-    // console.log(ctx)
-    // console.log(ctx.request)
-    ctx.body = 'Hello World this is root url!'
+    debugger
+    ctx.body = 'Hello World this is root path!'
 })
 
 router.get('/api', ctx => {
@@ -56,11 +57,20 @@ router.post('/post', async (ctx) => {
 //     next()
 // }
 
+
+const middleware = compose([
+    koaBody(), 
+    cors(), 
+    json({pretty:false, param:'pretty'}),
+    router.routes(),
+    router.allowedMethods()
+])
+app.use(middleware)
 // app.use(middleware)
-app.use(koaBody())
-app.use(cors())
-app.use(json({pretty:false, param:'pretty'}))
-app.use(router.routes())
-.use(router.allowedMethods())
+// app.use(koaBody())
+// app.use(cors())
+// app.use(json({pretty:false, param:'pretty'}))
+// app.use(router.routes())
+// .use(router.allowedMethods())
 
 app.listen(3000)
