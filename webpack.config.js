@@ -2,7 +2,8 @@ const path = require('path')
 const nodeExternals = require('webpack-node-externals')
 const {CleanWebpackPlugin} = require('clean-webpack-plugin')
 
-
+// add debugger to debug this file
+// npx node --inspect-brk ./node_modules/webpack/bin/webpack.js  --progress
 const webpackconfig = {
     target: 'node',
     mode: 'development',

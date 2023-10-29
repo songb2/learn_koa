@@ -4,7 +4,8 @@
   "description": "",
   "main": "webpack.config.js",
   "scripts": {
-    "start": "nodemon index.js",
+    "start": "nodemon --exec babel-node index.js",
+    "webpack:debug": "npx node --inspect-brk ./node_modules/webpack/bin/webpack.js  --progress",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [],

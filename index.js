@@ -1,11 +1,14 @@
-const Koa = require('koa')
-const { default: koaBody } = require('koa-body')
+const koa = require('koa')
+// const { default: koaBody } = require('koa-body')
 const Router = require('koa-router')
+// import koa from 'koa'
+import {koaBody} from 'koa-body'
+// import router from 'koa-router'
 const cors = require('@koa/cors')
 const json = require('koa-json')
 
 
-const app = new Koa()
+const app = new koa()
 const router = new Router()
 
 router.prefix('/api')
@@ -13,7 +16,7 @@ router.prefix('/api')
 router.get('/', ctx => {
     // console.log(ctx)
     // console.log(ctx.request)
-    ctx.body = 'Hello World this is root path!'
+    ctx.body = 'Hello World this is root url!'
 })
 
 router.get('/api', ctx => {
