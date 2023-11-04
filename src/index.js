@@ -9,9 +9,13 @@ const cors = require('@koa/cors')
 const json = require('koa-json')
 
 import compose from 'koa-compose'
+import compress from 'koa-compress'
 
 
 const app = new koa()
+
+const isDevMode = process.env.NODE_ENV === 'production'? false: true
+console.log(process.env.NODE_ENV)
 // const router = new Router()
 
 // router.prefix('/api')
@@ -65,6 +69,11 @@ const middleware = compose([
     json({pretty:false, param:'pretty'}),
     router()
 ])
+
+if(!isDevMode) {
+    app.use(compress())
+}
+
 app.use(middleware)
 // app.use(middleware)
 // app.use(koaBody())
