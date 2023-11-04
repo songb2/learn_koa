@@ -1,6 +1,7 @@
 const koa = require('koa')
 // const { default: koaBody } = require('koa-body')
-const Router = require('koa-router')
+// const Router = require('koa-router')
+import router from './routes/routes'
 // import koa from 'koa'
 import {koaBody} from 'koa-body'
 // import router from 'koa-router'
@@ -11,45 +12,45 @@ import compose from 'koa-compose'
 
 
 const app = new koa()
-const router = new Router()
+// const router = new Router()
 
-router.prefix('/api')
+// router.prefix('/api')
 
-router.get('/', ctx => {
-    debugger
-    ctx.body = 'Hello World this is root path!'
-})
+// router.get('/', ctx => {
+//     debugger
+//     ctx.body = 'Hello World this is root path!'
+// })
 
-router.get('/api', ctx => {
-    // console.log(ctx)
-    // console.log(ctx.request)
-    const params = ctx.request.query
-    console.log(params)
-    console.log(params.name)    
-    ctx.body = {
-        name:params.name,
-        age:params.age
-    }
-})
+// router.get('/api', ctx => {
+//     // console.log(ctx)
+//     // console.log(ctx.request)
+//     const params = ctx.request.query
+//     console.log(params)
+//     console.log(params.name)    
+//     ctx.body = {
+//         name:params.name,
+//         age:params.age
+//     }
+// })
 
-router.get('/async', async (ctx) => {
-    let result = await new Promise((resolve) => {
-        setTimeout(function(){
-            resolve("Hello world 2s later!")
-        }, 2000)
-    })
-    ctx.body = result
-})
+// router.get('/async', async (ctx) => {
+//     let result = await new Promise((resolve) => {
+//         setTimeout(function(){
+//             resolve("Hello world 2s later!")
+//         }, 2000)
+//     })
+//     ctx.body = result
+// })
 
-router.post('/post', async (ctx) => {
-    let {body} = ctx.request
-    ctx.body = {
-        ...body
-    }
-    ctx.body = {
-        ...body
-    }
-})
+// router.post('/post', async (ctx) => {
+//     let {body} = ctx.request
+//     ctx.body = {
+//         ...body
+//     }
+//     ctx.body = {
+//         ...body
+//     }
+// })
 
 // const middleware = function async (ctx, next) {
 //     console.log('this is a middleware!')
@@ -62,8 +63,7 @@ const middleware = compose([
     koaBody(), 
     cors(), 
     json({pretty:false, param:'pretty'}),
-    router.routes(),
-    router.allowedMethods()
+    router()
 ])
 app.use(middleware)
 // app.use(middleware)
